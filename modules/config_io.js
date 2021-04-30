@@ -39,8 +39,8 @@ exports.load = () => {
 	try {
 		if (fs.existsSync(exports.filepath)) {
 			Object.assign(exports.config, JSON.parse(fs.readFileSync(exports.filepath, "utf8")));
-			errortext = "";
 		}
+		errortext = "";
 	} catch (err) {
 		console.log(err.toString());
 		errortext = err.toString();
@@ -61,6 +61,13 @@ exports.load = () => {
 // ---------------------------------------------------------------------------------------------------------------------------
 
 exports.save = () => {
+
+	// Don't save if the load failed. Let the user fix their
+	// broken config file, don't overwrite it with a fresh one.
+
+	if (errortext) {
+		return;
+	}
 
 	// Make a copy of the defaults. Doing it this way seems to
 	// ensure the final JSON string has the same ordering...
