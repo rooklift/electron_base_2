@@ -12,7 +12,7 @@ config_io.create_if_needed();
 // Globals, only want a few...
 
 global.config = config_io.config;
-global.hub = require("./hub").NewHub();
+global.hub = require("./hub").new_hub();
 
 global.alert = (msg) => {
 	ipcRenderer.send("alert", stringify(msg));
