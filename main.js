@@ -89,7 +89,23 @@ function menu_build() {
 			label: "App",
 			submenu: [
 				{
-					role: "quit"
+					label: "About",
+					click: () => {
+						alert(`${electron.app.getName()} (${electron.app.getVersion()}) in Electron (${process.versions.electron})`);
+					}
+				},
+				{
+					type: "separator",
+				},
+				{
+					label: "Foo",
+					accelerator: "CommandOrControl+O",
+					click: () => {
+						win.webContents.send("foo");
+					}
+				},
+				{
+					type: "separator",
 				},
 				{
 					role: "toggledevtools"
@@ -104,10 +120,9 @@ function menu_build() {
 					type: "separator",
 				},
 				{
-					label: "Foo",
-					click: () => {
-						win.webContents.send("foo");
-					}
+					label: "Quit",
+					accelerator: "CommandOrControl+Q",
+					role: "quit"
 				},
 			]
 		},
