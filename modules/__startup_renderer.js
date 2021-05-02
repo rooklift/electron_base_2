@@ -16,6 +16,7 @@ global.alert = (msg) => {
 };
 
 global.config = config_io.config;
+global.save_config = config_io.save;
 global.hub = require("./hub").new_hub();
 
 // --------------------------------------------------------
