@@ -101,7 +101,7 @@ function menu_build() {
 					label: "Foo",
 					accelerator: "CommandOrControl+O",
 					click: () => {
-						win.webContents.send("foo");
+						win.webContents.send("call", "foo");
 					}
 				},
 				{
