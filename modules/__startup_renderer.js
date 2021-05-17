@@ -17,15 +17,18 @@ global.alert = (msg) => {
 
 global.config = config_io.config;
 global.save_config = config_io.save;
+
 global.hub = require("./hub").new_hub();
 
 // --------------------------------------------------------
 // Menu handlers...
 
 ipcRenderer.on("set", (event, msg) => {
-	config[msg.key] = msg.value;
-	save_config();
-	hub.draw();
+	hub.set(msg.key, msg.value);
+});
+
+ipcRenderer.on("toggle", (event, msg) => {
+	hub.set(msg, !config[msg]);
 });
 
 ipcRenderer.on("call", (event, msg) => {

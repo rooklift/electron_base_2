@@ -97,9 +97,10 @@ function menu_build() {
 				},
 				{
 					label: "Foo",
-					accelerator: "CommandOrControl+O",
+					type: "checkbox",
+					checked: config.foo,
 					click: () => {
-						win.webContents.send("call", "foo");
+						win.webContents.send("toggle", "foo");
 					}
 				},
 				{

@@ -19,10 +19,27 @@ exports.filepath = electron.app ?
 
 exports.config = {};
 
-exports.defaults = {
-	"width": 1024,
-	"height": 768,
+exports.defaults_classified = {
+
+	// It is OK for something to be in multiple classications.
+
+	no_immediate_effect: {
+		"width": 1024,
+		"height": 768,
+	},
+
+	alerters: {
+		"foo": true,
+	},
 };
+
+exports.defaults = {};
+
+for (let cl of Object.keys(exports.defaults_classified)) {
+	for (let key of Object.keys(exports.defaults_classified[cl])) {
+		exports.defaults[key] = exports.defaults_classified[cl][key];
+	}
+}
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
