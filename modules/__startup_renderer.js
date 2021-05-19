@@ -8,7 +8,7 @@ const stringify = require("./stringify");
 config_io.load();
 config_io.create_if_needed();
 
-// --------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
 // Globals, only want a few...
 
 global.alert = (msg) => {
@@ -20,7 +20,7 @@ global.save_config = config_io.save;
 
 global.hub = require("./hub").new_hub();
 
-// --------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
 // Menu handlers...
 
 ipcRenderer.on("set", (event, msg) => {
@@ -43,3 +43,9 @@ ipcRenderer.on("call", (event, msg) => {
 	}
 	fn();
 });
+
+// ------------------------------------------------------------------------------------------------
+
+window.addEventListener("error", (event) => {
+	alert("An uncaught exception happened in the renderer process. See the dev console for details. The app might now be in a bad state.");
+}, {once: true});
