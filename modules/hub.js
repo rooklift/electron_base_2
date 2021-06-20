@@ -24,6 +24,10 @@ let hub_props = {
 	},
 
 	quit: function() {
+
+		config.width = Math.floor(window.innerWidth * zoomfactor);
+		config.height = Math.floor(window.innerHeight * zoomfactor);
+
 		save_config();									// As long as we use the sync save, this will complete before we
 		ipcRenderer.send("terminate");					// send "terminate". Not sure about results if that wasn't so.
 	},

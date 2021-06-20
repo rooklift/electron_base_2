@@ -31,6 +31,8 @@ const open_dialog = electron.dialog.showOpenDialogSync || electron.dialog.showOp
 
 function startup() {
 
+	let desired_zoomfactor = 1 / electron.screen.getPrimaryDisplay().scaleFactor;
+
 	win = new electron.BrowserWindow({
 		width: config.width,
 		height: config.height,
@@ -43,15 +45,15 @@ function startup() {
 			contextIsolation: false,
 			nodeIntegration: true,
 			spellcheck: false,
-			zoomFactor: 1 / electron.screen.getPrimaryDisplay().scaleFactor		// Unreliable, see https://github.com/electron/electron/issues/10572
+			zoomFactor: desired_zoomfactor			// Unreliable, see https://github.com/electron/electron/issues/10572
 		}
 	});
 
 	win.once("ready-to-show", () => {
 		try {
-			win.webContents.setZoomFactor(1 / electron.screen.getPrimaryDisplay().scaleFactor);	// This seems to work, note issue 10572 above.
+			win.webContents.setZoomFactor(desired_zoomfactor);	// This seems to work, note issue 10572 above.
 		} catch (err) {
-			win.webContents.zoomFactor = 1 / electron.screen.getPrimaryDisplay().scaleFactor;	// The method above "will be removed" in future.
+			win.webContents.zoomFactor = desired_zoomfactor;	// The method above "will be removed" in future.
 		}
 		win.show();
 		win.focus();
@@ -79,6 +81,7 @@ function startup() {
 
 	let query = {};
 	query.user_data_path = electron.app.getPath("userData");
+	query.zoomfactor = desired_zoomfactor;
 
 	win.loadFile(
 		path.join(__dirname, "renderer.html"),
