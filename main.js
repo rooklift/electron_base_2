@@ -24,11 +24,6 @@ if (electron.app.isReady()) {
 
 // --------------------------------------------------------------------------------------------------------------
 
-const save_dialog = electron.dialog.showSaveDialogSync || electron.dialog.showSaveDialog;
-const open_dialog = electron.dialog.showOpenDialogSync || electron.dialog.showOpenDialog;
-
-// --------------------------------------------------------------------------------------------------------------
-
 function startup() {
 
 	let desired_zoomfactor = 1 / electron.screen.getPrimaryDisplay().scaleFactor;
