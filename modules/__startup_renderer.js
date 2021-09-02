@@ -7,7 +7,6 @@ const config_io = require("./config_io");
 const stringify = require("./stringify");
 
 config_io.load();
-config_io.create_if_needed();
 
 // ------------------------------------------------------------------------------------------------
 // Globals, only want a few...
@@ -16,9 +15,8 @@ global.alert = (msg) => {
 	ipcRenderer.send("alert", stringify(msg));
 };
 
-global.zoomfactor = parseFloat(querystring.parse(global.location.search)["zoomfactor"]);
+global.zoomfactor = parseFloat(querystring.parse(global.location.search).zoomfactor);
 global.config = config_io.config;
-global.save_config = config_io.save;
 global.hub = require("./hub").new_hub();
 
 // ------------------------------------------------------------------------------------------------

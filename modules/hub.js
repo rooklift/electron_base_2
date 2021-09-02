@@ -1,7 +1,7 @@
 "use strict";
 
 const {ipcRenderer} = require("electron");
-const {defaults_classified} = require("./config_io");
+const config_io = require("./config_io");
 
 exports.new_hub = function() {
 	let hub = Object.create(hub_props);
@@ -28,7 +28,7 @@ let hub_props = {
 		config.width = Math.floor(window.innerWidth * zoomfactor);
 		config.height = Math.floor(window.innerHeight * zoomfactor);
 
-		save_config();									// As long as we use the sync save, this will complete before we
+		config_io.save();								// As long as we use the sync save, this will complete before we
 		ipcRenderer.send("terminate");					// send "terminate". Not sure about results if that wasn't so.
 	},
 

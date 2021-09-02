@@ -89,14 +89,3 @@ exports.save = () => {
 		console.log(err.toString());
 	}
 };
-
-// ------------------------------------------------------------------------------------------------
-
-exports.create_if_needed = () => {
-
-	if (fs.existsSync(exports.filepath)) {
-		return;
-	}
-
-	exports.save();
-};
