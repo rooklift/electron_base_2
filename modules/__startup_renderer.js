@@ -23,7 +23,9 @@ global.hub = require("./hub").new_hub();
 // Menu handlers...
 
 ipcRenderer.on("set", (event, msg) => {
-	hub.set(msg.key, msg.value);
+	for (let [key, value] of Object.entries(msg)) {
+		hub.set(key, value);
+	}
 });
 
 ipcRenderer.on("toggle", (event, msg) => {
