@@ -17,7 +17,7 @@ exports.filepath = electron.app ?
 
 // ------------------------------------------------------------------------------------------------
 
-exports.config = {};
+global.config = {};
 
 exports.defaults = {
 	"width": 1024,
@@ -39,7 +39,7 @@ exports.load = () => {
 
 	try {
 		if (fs.existsSync(exports.filepath)) {
-			Object.assign(exports.config, JSON.parse(fs.readFileSync(exports.filepath, "utf8")));
+			Object.assign(config, JSON.parse(fs.readFileSync(exports.filepath, "utf8")));
 		}
 		errortext = "";
 	} catch (err) {
@@ -53,8 +53,8 @@ exports.load = () => {
 	let defaults_copy = JSON.parse(JSON.stringify(exports.defaults));
 
 	for (let key of Object.keys(defaults_copy)) {
-		if (exports.config.hasOwnProperty(key) === false) {
-			exports.config[key] = defaults_copy[key];
+		if (config.hasOwnProperty(key) === false) {
+			config[key] = defaults_copy[key];
 		}
 	}
 };
@@ -77,9 +77,9 @@ exports.save = () => {
 
 	// Adjust that copy, but only for keys present in both.
 
-	for (let key of Object.keys(exports.config)) {
+	for (let key of Object.keys(config)) {
 		if (out.hasOwnProperty(key)) {
-			out[key] = exports.config[key];
+			out[key] = config[key];
 		}
 	}
 

@@ -6,8 +6,6 @@ const querystring = require("querystring");
 const config_io = require("./config_io");
 const stringify = require("./stringify");
 
-config_io.load();
-
 // ------------------------------------------------------------------------------------------------
 // Globals, only want a few...
 
@@ -15,9 +13,10 @@ global.alert = (msg) => {
 	ipcRenderer.send("alert", stringify(msg));
 };
 
+config_io.load();		// Creates global.config
+
 global.zoomfactor = parseFloat(querystring.parse(global.location.search).zoomfactor);
-global.config = config_io.config;
-global.hub = require("./hub").new_hub();
+global.hub = require("./hub")
 
 // ------------------------------------------------------------------------------------------------
 // Menu handlers...

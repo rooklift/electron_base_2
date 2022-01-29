@@ -8,8 +8,7 @@ const alert = require("./modules/alert_main");
 const config_io = require("./modules/config_io");
 const stringify = require("./modules/stringify");
 
-config_io.load();
-let config = config_io.config;
+config_io.load();				// Creates global.config
 
 let menu = menu_build();
 let win;						// We're supposed to keep global references to every window we make.
