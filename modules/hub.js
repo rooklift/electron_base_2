@@ -3,12 +3,7 @@
 const {ipcRenderer} = require("electron");
 const config_io = require("./config_io");
 
-exports.new_hub = function() {
-	let hub = Object.create(hub_props);
-	return hub;
-};
-
-let hub_props = {
+module.exports = {
 
 	set: function(key, value) {
 
