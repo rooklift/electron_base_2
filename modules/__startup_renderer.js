@@ -3,7 +3,7 @@
 const {ipcRenderer} = require("electron");
 const querystring = require("querystring");
 
-const config_io = require("./config_io");
+const config_io = require("./config_io");		// Creates global.config
 const stringify = require("./stringify");
 
 // ------------------------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ global.alert = (msg) => {
 	ipcRenderer.send("alert", stringify(msg));
 };
 
-config_io.load();		// Creates global.config
+config_io.load();								// Populates global.config
 
 global.zoomfactor = parseFloat(querystring.parse(global.location.search).zoomfactor);
 global.hub = require("./hub")
